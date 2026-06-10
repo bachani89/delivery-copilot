@@ -34,6 +34,18 @@ flowchart TD
 | Sonnet for workers, Opus for synthesis | Cost-aware model routing: cheap fast models for narrow extraction, stronger model where judgement matters | Could run everything on one model; this mirrors production cost patterns |
 | Prompts as files, not strings | Prompt changes do not require code changes; visible in version control | Slightly more setup |
 
+## Limitations and known issues
+
+The generated report should be reviewed carefully before sharing. Known failure modes:
+
+- **Duplicate entries.** The same risk or action extracted from multiple source files may appear more than once in the tables even after deduplication, particularly when the wording differs enough to fool the merge step. Scan the Risk Register and Actions table for near-duplicates before submitting.
+- **Inconsistent counts.** The executive summary is written before the tables are finalised. Stated counts (e.g. "three Red risks") can diverge from the actual table rows if deduplication reduces the total. Always verify that numbers in the summary match the table.
+- **Conflicting narratives.** When input files contradict each other (e.g. a task marked Complete in one file and In Progress in another), the synthesiser picks one version without flagging the conflict. Check the source files if any status looks unexpected.
+- **Invented detail.** On rare occasions the model may embellish a risk mitigation or action description beyond what the source text supports. Treat all free-text fields as drafts and verify against the originals.
+- **RAG rating drift.** Ratings are assigned by the Risk Analyst agent from unstructured text. Subjective or ambiguous language can lead to over- or under-stated severity. Apply your own judgement before circulating.
+
+These are inherent limitations of LLM-based extraction from unstructured input, not bugs. The tool is designed to accelerate a first draft, not to replace human review.
+
 ## What I would add next
 
 - Evals: a small golden dataset of inputs and expected risk extractions, scored on each change

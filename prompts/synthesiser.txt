@@ -26,3 +26,4 @@ Rules:
 - Keep the tone professional and direct.
 - No em dashes anywhere in the report.
 - Output Markdown only. No preamble, no closing remarks outside the four sections.
+- Ensure any counts stated in the executive summary exactly match the tables below.
