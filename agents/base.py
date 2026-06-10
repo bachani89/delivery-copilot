@@ -43,8 +43,9 @@ def call_agent(
         system_prompt: The system-level instructions for the agent.
         user_content: The user turn content (the artefact text to analyse).
         model: Anthropic model ID. Defaults to claude-sonnet-4-6.
-        json_mode: When True, prefill the assistant turn with '{' and parse
-                   the response as JSON, returning a dict.
+        json_mode: When True, appends a strict JSON instruction to the system
+                   prompt and parses the response as JSON, returning a dict.
+                   Markdown fences are stripped defensively before parsing.
 
     Returns:
         Parsed dict if json_mode is True, plain string otherwise.
@@ -56,16 +57,13 @@ def call_agent(
     """
     client = _get_client()
 
-    messages: list[dict] = [{"role": "user", "content": user_content}]
-    prefill = ""
-
     if json_mode:
         system_prompt = (
             system_prompt
             + "\nReturn raw JSON only. Do not include markdown fences or any text outside the JSON object."
         )
-        messages.append({"role": "assistant", "content": "{"})
-        prefill = "{"
+
+    messages: list[dict] = [{"role": "user", "content": user_content}]
 
     last_exc: Exception = RuntimeError("call_agent: no attempts made")
 
@@ -79,8 +77,7 @@ def call_agent(
             )
             text = response.content[0].text
             if json_mode:
-                raw = _strip_fences(prefill + text)
-                return json.loads(raw)
+                return json.loads(_strip_fences(text))
             return text
         except (anthropic.RateLimitError, anthropic.APIConnectionError, anthropic.InternalServerError) as exc:
             last_exc = exc
