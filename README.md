@@ -2,7 +2,7 @@
 
 An agentic CLI that turns messy project artefacts (RAID logs, meeting notes, task lists) into an executive-ready status report, built on the Anthropic API using an orchestrator-worker pattern.
 
-Built by a Senior Delivery Manager with 5+ years leading digital transformation programmes for UK Central Government, as a practical demonstration of multi-agent architecture using the API primitives directly (no frameworks).
+Built by a Senior Delivery Manager with 5+ years leading digital transformation programmes UK public sector, as a practical demonstration of multi-agent architecture using the API primitives directly (no frameworks).
 
 ## Why this exists
 
