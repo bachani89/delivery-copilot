@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${project_name} | Executive Status Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #16283f;
+    --navy-deep: #0e1a2b;
+    --teal: #0e7c7b;
+    --teal-soft: #e3f0ef;
+    --paper: #fbfbf9;
+    --ink: #24303e;
+    --ink-soft: #5a6877;
+    --line: #dde3e8;
+    --red: #b3261e;
+    --red-soft: #fbeae9;
+    --amber: #9a6700;
+    --amber-soft: #fdf3df;
+    --green: #1a7340;
+    --green-soft: #e6f2ea;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    background: #eef0f2;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 920px;
+    margin: 32px auto;
+    background: var(--paper);
+    box-shadow: 0 2px 24px rgba(22, 40, 63, 0.12);
+  }
+
+  /* ---------- Header band ---------- */
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 36px 48px 30px;
+    position: relative;
+  }
+  header::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 5px;
+    background: var(--teal);
+  }
+  .meta-row {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9fb3c8;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Spectral', serif;
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+  }
+  .subtitle { color: #c4d2e0; font-size: 14px; font-weight: 400; }
+  .header-status {
+    position: absolute;
+    top: 36px;
+    right: 48px;
+    text-align: right;
+  }
+  .overall-chip {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    padding: 6px 18px;
+    border-radius: 3px;
+    border: 1.5px solid transparent;
+  }
+  .overall-chip.red    { background: var(--red-soft);   color: var(--red);   border-color: var(--red);   }
+  .overall-chip.amber  { background: var(--amber-soft); color: var(--amber); border-color: var(--amber); }
+  .overall-chip.green  { background: var(--green-soft); color: var(--green); border-color: var(--green); }
+  .overall-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9fb3c8;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- RAG count strip ---------- */
+  .rag-strip {
+    display: flex;
+    border-bottom: 1px solid var(--line);
+  }
+  .rag-cell {
+    flex: 1;
+    padding: 14px 48px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    border-left: 1px solid var(--line);
+  }
+  .rag-cell:first-child { border-left: none; }
+  .rag-cell .count { font-size: 26px; font-weight: 700; line-height: 1; }
+  .rag-cell .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .rag-cell.red   .count { color: var(--red);   }
+  .rag-cell.amber .count { color: var(--amber); }
+  .rag-cell.green .count { color: var(--green); }
+  .rag-cell.actions .count { color: var(--navy); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 30px 48px; }
+  section + section { border-top: 1px solid var(--line); }
+  h2 {
+    font-family: 'Spectral', serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .exec p { max-width: 72ch; color: var(--ink); }
+  .exec strong { color: var(--navy); }
+
+  /* ---------- Tables ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--navy);
+  }
+  tbody td {
+    padding: 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* RAG rail: coloured left edge per risk row */
+  .risk-table td:first-child { border-left: 4px solid transparent; }
+  tr.r-red   td:first-child { border-left-color: var(--red);   }
+  tr.r-amber td:first-child { border-left-color: var(--amber); }
+  tr.r-green td:first-child { border-left-color: var(--green); }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .badge.red   { background: var(--red-soft);   color: var(--red);   }
+  .badge.amber { background: var(--amber-soft); color: var(--amber); }
+  .badge.green { background: var(--green-soft); color: var(--green); }
+
+  .pill {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    padding: 2px 9px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .pill.blocked  { border-color: var(--red);   color: var(--red);   background: var(--red-soft);   }
+  .pill.progress { border-color: var(--teal);  color: var(--teal);  background: var(--teal-soft);  }
+  .pill.complete { border-color: var(--green); color: var(--green); background: var(--green-soft); }
+
+  .cat     { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); white-space: nowrap; }
+  .owner   { font-weight: 600; color: var(--navy); white-space: nowrap; }
+  .deadline { font-family: 'IBM Plex Mono', monospace; font-size: 12px; white-space: nowrap; }
+
+  /* ---------- Recommendations ---------- */
+  .rec {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--teal);
+    background: #fff;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    border-radius: 0 3px 3px 0;
+  }
+  .rec:last-child { margin-bottom: 0; }
+  .rec .rec-head  { font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+  .rec .rec-owner {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 5px;
+  }
+  .rec p { color: var(--ink); font-size: 13px; max-width: 78ch; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 18px 48px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+  }
+  footer .gen { color: var(--teal); font-weight: 500; }
+
+  /* ---------- Print ---------- */
+  @media print {
+    body { background: #fff; font-size: 12px; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+    section { padding: 22px 36px; }
+    header { padding: 28px 36px 24px; }
+    header, .overall-chip, .badge, .pill, .rec, .rag-cell {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    tr, .rec { break-inside: avoid; }
+  }
+  @media (max-width: 700px) {
+    section, header { padding-left: 22px; padding-right: 22px; }
+    .header-status { position: static; text-align: left; margin-top: 14px; }
+    .rag-cell { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="meta-row">
+      <span>${project_name}</span>
+      <span>${period}</span>
+      <span>Reporting date: ${reporting_date}</span>
+    </div>
+    <h1>Executive Status Report</h1>
+    <div class="subtitle">Generated by Delivery Copilot</div>
+    <div class="header-status">
+      <div class="overall-label">Overall status</div>
+      <div class="overall-chip ${overall_rag_lower}">${overall_rag}</div>
+    </div>
+  </header>
+
+  <div class="rag-strip">
+    <div class="rag-cell red">    <span class="count">${red_count}</span>   <span class="label">Red risks</span></div>
+    <div class="rag-cell amber">  <span class="count">${amber_count}</span> <span class="label">Amber risks</span></div>
+    <div class="rag-cell green">  <span class="count">${green_count}</span> <span class="label">Green risks</span></div>
+    <div class="rag-cell actions"><span class="count">${action_count}</span> <span class="label">Actions tracked</span></div>
+  </div>
+
+  <section class="exec">
+    <h2>Executive Summary</h2>
+    <p>${executive_summary}</p>
+  </section>
+
+  <section>
+    <h2>Risk Register</h2>
+    <table class="risk-table">
+      <thead>
+        <tr>
+          <th style="width:42%">Risk</th>
+          <th>Category</th>
+          <th>RAG</th>
+          <th style="width:38%">Mitigation</th>
+        </tr>
+      </thead>
+      <tbody>
+${risk_rows}
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Actions and Blockers</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:52%">Action</th>
+          <th>Owner</th>
+          <th>Deadline</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+${action_rows}
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Recommendations</h2>
+${recommendation_cards}
+  </section>
+
+  <footer>
+    <span class="gen">Generated by Delivery Copilot</span>
+    <span>Multi-agent analysis: risk_analyst / summariser / action_extractor</span>
+    <span>github.com/YOUR_USERNAME/delivery-copilot</span>
+  </footer>
+
+</div>
+</body>
+</html>
