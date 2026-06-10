@@ -1,8 +1,8 @@
 # Delivery Copilot
 
-An agentic CLI that turns messy project artefacts (RAID logs, meeting notes, task lists) into an executive-ready status report, built on the Anthropic API using an orchestrator-worker pattern.
+An agentic CLI that turns messy project artefacts (RAID logs, meeting notes, task lists) and a ships dual-format output with a templated HTML renderer, built on the Anthropic API using an orchestrator-worker pattern.
 
-Built by a Senior Delivery Manager with 5+ years leading digital transformation programmes UK public sector, as a practical demonstration of multi-agent architecture using the API primitives directly (no frameworks).
+Built by as a practical demonstration of multi-agent architecture using the API primitives directly (no frameworks) by a Senior Project Manager for learning and demonstrative purposes.
 
 ## Why this exists
 
@@ -58,12 +58,56 @@ These are inherent limitations of LLM-based extraction from unstructured input, 
 ## Quick start
 
 ```bash
-git clone https://github.com/bachani89/delivery-copilot
+git clone https://github.com/Bachani89/delivery-copilot
 cd delivery-copilot
 pip install -r requirements.txt
 set ANTHROPIC_API_KEY=your-key-here   # Windows
 python main.py samples/raid_log.csv samples/meeting_notes.txt --output output/report.md
 ```
+
+## How to use (no coding experience needed)
+
+This tool reads your project files and writes a status report. You run it by typing a few commands. Here is the full process from a blank machine.
+
+**1. Install Python** (one time only)
+Download Python from [python.org/downloads](https://www.python.org/downloads/) and run the installer. On the first screen, tick the box that says **"Add Python to PATH"** before clicking Install. This matters.
+
+**2. Get the tool** (one time only)
+Click the green **Code** button at the top of this page, choose **Download ZIP**, and unzip it somewhere easy to find, such as your Documents folder.
+
+**3. Get an API key** (one time only)
+The tool uses Claude, Anthropic's AI model, to analyse your files. Sign up at [console.anthropic.com](https://console.anthropic.com), add a small amount of credit, and create an API key. Treat the key like a password and do not share it. A typical report costs a few pence to generate.
+
+**4. Open a terminal in the tool's folder**
+Open the unzipped folder in File Explorer, click the address bar at the top, type `cmd` and press Enter. A black command window opens, already pointed at the right folder.
+
+**5. Install the tool's dependencies** (one time only)
+In the command window, type:
+
+```
+pip install -r requirements.txt
+```
+
+**6. Tell the tool your API key** (each time you open a new command window)
+
+```
+set ANTHROPIC_API_KEY=paste-your-key-here
+```
+
+**7. Run it on your files**
+Drop your project files (RAID log, meeting notes, task list, in CSV or plain text format) into the `samples` folder, or anywhere you like, then run:
+
+```
+python main.py samples/raid_log.csv samples/meeting_notes.txt --format html
+```
+
+Swap in your own file names. After a minute or so, your report appears in the `output` folder. The `.html` version opens in any web browser and can be saved as a PDF with Ctrl+P.
+
+**Things to know**
+- The report is a first draft. Review it before sharing, as the Limitations section above explains.
+- If you see an error about `ANTHROPIC_API_KEY`, you skipped step 6 or opened a fresh command window since running it.
+- If `python` is not recognised, Python was installed without the PATH box ticked. Reinstall and tick it.
+- Your files are sent to Anthropic's API for analysis. Do not run it on information you are not permitted to share with a third party processor.
 
 ## Sample output
 
