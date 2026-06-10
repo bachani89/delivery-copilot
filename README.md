@@ -58,7 +58,7 @@ These are inherent limitations of LLM-based extraction from unstructured input, 
 ## Quick start
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/delivery-copilot
+git clone https://github.com/bachani89/delivery-copilot
 cd delivery-copilot
 pip install -r requirements.txt
 set ANTHROPIC_API_KEY=your-key-here   # Windows
