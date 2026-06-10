@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import anthropic
+
 from agents.base import call_agent
 from agents.action_extractor import extract_actions
 from agents.risk_analyst import analyse_risks
@@ -106,4 +108,7 @@ if __name__ == "__main__":
         main()
     except EnvironmentError as exc:
         print(f"[error] {exc}", file=sys.stderr)
+        sys.exit(1)
+    except anthropic.APIError as exc:
+        print(f"[error] Anthropic API error: {exc}", file=sys.stderr)
         sys.exit(1)
