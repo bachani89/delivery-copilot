@@ -12,11 +12,11 @@ A 100-150 word narrative covering overall project status, key progress, the top 
 
 ## Risk Register
 A Markdown table with columns: | Risk | Category | RAG | Mitigation |
-Include every risk from the input. Preserve the exact RAG values (Red, Amber, Green).
+The input may contain duplicate or near-duplicate risks extracted from multiple source files. Before rendering the table, deduplicate: if two or more entries describe the same underlying issue, merge them into one row using the most specific description and mitigation available. Assign the highest RAG rating among the duplicates. Preserve the exact RAG values (Red, Amber, Green). Red risks first, then Amber, then Green.
 
 ## Actions and Blockers
 A Markdown table with columns: | Action | Owner | Deadline | Status |
-Include every action from the input. Blocked items must appear first.
+The input may contain duplicate or near-duplicate actions extracted from multiple source files. Before rendering the table, deduplicate: if two or more entries describe the same underlying task, merge them into one row using the most specific description, the known owner, and the earliest deadline. Blocked items first, then In Progress, then Open, then Complete.
 
 ## Recommendations
 3-5 concrete, owner-assignable bullet points for the delivery manager based on the combined analysis.
