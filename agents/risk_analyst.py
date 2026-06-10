@@ -30,6 +30,11 @@ def analyse_risks(content: str) -> list[Risk]:
     result: dict = call_agent(system_prompt, content, json_mode=True)
     risks: list[Risk] = result.get("risks", [])
 
+    for r in risks:
+        r["rag_rating"] = r.get("rag_rating", "Amber").strip().title()
+        if r["rag_rating"] not in {"Red", "Amber", "Green"}:
+            r["rag_rating"] = "Amber"
+
     order = {"Red": 0, "Amber": 1, "Green": 2}
-    risks.sort(key=lambda r: order.get(r.get("rag_rating", "Green"), 2))
+    risks.sort(key=lambda r: order.get(r["rag_rating"], 1))
     return risks
