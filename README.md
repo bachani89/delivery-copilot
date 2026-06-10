@@ -84,6 +84,7 @@ Project Helios is rated Amber following Sprint 4, with 34 of 42 story points del
 | Automated database backups have been down since 31 May (P1 incident I002 / OPS-2241), creating a critical data loss exposure; remediation task is currently blocked. | Technical | Red | Assign a named owner immediately; Ops to perform a manual backup and restore OPS-2241 monitoring as emergency priority today. Sarah to receive daily status updates until resolved. |
 | UAT environment has been delayed twice by the infrastructure team and is now not expected until 16 June, blocking regression, smoke testing, and UAT execution. | Schedule | Red | James to escalate infrastructure delays to delivery manager and steering group; obtain a firm committed date with no further slippage tolerance. Lena to prepare the full UAT pack in advance so testing begins immediately on environment availability. |
 
+_Note: this excerpt deliberately retains a count inconsistency as a live example of the limitation documented above_
 ---
 
 ## Built with
