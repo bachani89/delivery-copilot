@@ -1,0 +1,19 @@
+ID,Task,Owner,Due,Status,Priority,Comments
+T001,Chase AWS security approval - escalate to CTO if needed,Sarah,10/06/26,open,critical,security team had it since 1 june
+T002,steering group - maintenance window approval,Sarah,9 june,open,high,for DMS cutover approach
+T003,payment API feature flag,James,20 june,in progress,high,3 days est. unblocks payment testing
+T004,fix checkout test (race condition),James,13/06/26,in progress,high,
+T005,UI signoff escalation - Head of Product,Tom,11 june,open,high,2 review cycles no response
+T006,UAT smoke test pack,Lena,,open,medium,cant run til env ready just prepping
+T007,chase infra daily on UAT env,James,16/06/26,in progress,high,they've moved it twice
+T008,redo data migration sizing,Marcus,19 june,open,medium,off sick til 18 june
+T009,finance field mapping workshop,Tom,14/06/26,open,medium,
+T010,send agenda for finance workshop,Tom,11 june,open,low,needed before T009
+T011,payment provider - confirm v3 API compat,Sarah,12/06/26,open,CRITICAL,3 weeks no answer
+T012,manual db backup + monitor OPS-2241,Ops,,BLOCKED,critical,automated backups down since 31 may
+T013,sprint 5 planning invite + backlog,Sarah,10 june,open,low,12 june 10am BST
+T014,replan backlog for reduced capacity,Sarah,12 june,open,medium,marcus absence = 30% down
+T015,update risk register post sprint review,Sarah,9 june,open,medium,
+T016,send perf benchmarking results to Tom,James,,done,low,
+T017,component library edge cases,Priya,,in progress,low,couple of minor things flagged in review
+T018,hypercare resource booking,,tbd,open,medium,waiting on confirmed go live date from business - asked twice

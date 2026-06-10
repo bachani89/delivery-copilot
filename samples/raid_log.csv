@@ -1,0 +1,14 @@
+ID,Type,Description,Owner,RAG,Mitigation,Status,Notes
+R001,Risk,payment provider hasn't confirmed if new API version will work with our setup,James,RED,chase account manager,Open,been waiting 3 weeks
+R002,Risk,Marcus off sick - not sure when back,Sarah,amber,,Open,affects sprint 5 capacity
+R003,Risk,UAT env still not ready - was due 2nd June,James,Amber,infra team chasing,Open,
+R004,RISK,data vol much bigger than we thought. Original estimate was 800gb now looking more like 2.4tb,Dev Team,amber,re-run capacity planning,Open,could affect migration window
+R005,Risk,stakeholder hasnt signed off UI,Tom,AMBER,,Open,2nd review cycle done nothing back
+A001,Assumption,legacy db schema docs are accurate,James,green,verified vs prod snapshot May 28,Closed,
+A002,Assumption,business giving us 2 UAT testers for full 3 weeks,,amber,only 1 confirmed so far,Open,risk to coverage
+I001,Issue,build pipeline keeps failing on integration tests - checkout module,Dev Team,amber,race condition fix in progress,Open,target fix 13 june
+I002,Issue,prod db backups not running since 31 May,Ops,RED,,Open,OPS-2241 raised - P1
+I003,Issue,,,green,,Closed,placeholder - ignore
+D001,Dependency,AWS env blocked on security sign off,Ops,red,submitted 1 june - chasing,Open,could slip 2 weeks
+D002,Dependency,reporting module needs finance to sign off field mapping,Tom,Amber,,Open,workshop tbc
+D003,Dependency,need confirmed go-live date from business before we can book hypercare resource,Sarah,amber,,Open,asked twice no response

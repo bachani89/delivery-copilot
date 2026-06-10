@@ -1,0 +1,60 @@
+Project Helios Sprint 4 review  5/6/26
+
+Attendees: Sarah, James, Priya, Marcus (joined late, dropped off early), Lena, Tom
+
+Quick note - Marcus is still not well so only caught the first 20 mins, he'll pick up actions async
+
+---
+
+Review
+
+We got 34 points done out of 42. Main reasons were Marcus being off and Lena couldnt start regression testing because the UAT env still isnt up. Infra team said 16th June now but theyve moved it twice already.
+
+Stuff we finished:
+- auth flow done and tested
+- order history API on staging
+- frontend component library ported (Priya flagged a couple of edge cases still to fix but theyre minor)
+- perf benchmarking done - James said results look fine
+
+Not done - carrying forward:
+checkout integration tests (flaky test still not fixed, James on it)
+UAT smoke tests - Lena cant run them til env is ready
+reporting module - still waiting on finance
+
+---
+
+Decisions (important)
+
+DB migration - we're going with AWS DMS, 48hr cutover window not big bang. Less risky but we need the business to approve an extended maintenance window. Sarah to raise with steering by 9 June. If they say no we need to revisit.
+
+Payment API - James is going to build a feature flag so we can switch between old and new API versions without a deployment. Tom said thats fine. Adds about 3 days. This is critical given we still dont have confirmation from the provider.
+
+UI designs - Tom is escalating to Head of Product by 11 June. After that we're treating silence as approval and cracking on. Everyone agreed.
+
+---
+
+Risks / issues we talked about
+
+The backup issue (I002) - ops have raised a P1 but Sarah wants a daily update until its resolved. This is serious.
+
+AWS sign-off is now on the critical path. James said if we dont hear by end of this week we could lose 2 weeks. Sarah will go to the CTO if nothing by 10 June.
+
+Overall the team thinks we're amber. 18 July go-live is still possible but only if the two red risks get resolved this week basically.
+
+oh also - someone needs to send the sprint 5 planning invite, 12 June 10am. Can someone sort that? (Sarah?)
+
+---
+
+Actions
+
+Sarah - maintenance window request to steering, by 9 June
+Sarah - escalate AWS approval to CTO if no reply 10 June
+Sarah - contact payment provider acct manager by 12 June
+James - feature flag for payment API, done by 20 June
+James - fix checkout test by 13 June
+Tom - escalate UI signoff by 11 June
+Tom - sort finance workshop for reporting (14 June? check with Lena)
+Lena - get UAT pack ready so we can go as soon as env lands
+Marcus - redo the data migration sizing when hes back (was 800gb now 2.4tb apparently)
+
+Next meeting sprint 5 planning 12 June 10am BST
